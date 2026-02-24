@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, lazy, Suspense } from "react";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import ProductSection from "@/components/ProductSection";
@@ -7,8 +7,9 @@ import CartDrawer, { CartItem } from "@/components/CartDrawer";
 import Footer from "@/components/Footer";
 import { Product } from "@/components/ProductCard";
 import { paintings, crochetItems } from "@/data/products";
-import { Toaster } from "@/components/ui/sonner";
 import { toast } from "sonner";
+
+const ScrollScene = lazy(() => import("@/components/ScrollScene"));
 
 const Index = () => {
   const [cartOpen, setCartOpen] = useState(false);
@@ -56,9 +57,9 @@ const Index = () => {
         onAddToCart={addToCart}
       />
 
-      <div className="mx-auto max-w-5xl px-6">
-        <div className="h-px bg-border" />
-      </div>
+      <Suspense fallback={<div className="h-[400px]" />}>
+        <ScrollScene />
+      </Suspense>
 
       <ProductSection
         id="crochet"
