@@ -30,11 +30,12 @@ const ProductCard = ({ product, onAddToCart, index }: ProductCardProps) => {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <div className="relative overflow-hidden rounded-sm bg-card shadow-warm">
+      <div className="relative overflow-hidden rounded-lg bg-card shadow-warm hover:shadow-lavender transition-shadow duration-500">
         <div className="aspect-[3/4] overflow-hidden">
           <img
             src={product.image}
             alt={product.name}
+            loading="lazy"
             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
           />
         </div>
@@ -43,7 +44,7 @@ const ProductCard = ({ product, onAddToCart, index }: ProductCardProps) => {
         <motion.div
           initial={false}
           animate={{ opacity: hovered ? 1 : 0 }}
-          className="absolute inset-0 bg-foreground/20 flex items-center justify-center gap-3"
+          className="absolute inset-0 bg-primary/15 backdrop-blur-[1px] flex items-center justify-center gap-3"
         >
           <button
             onClick={() => onAddToCart(product)}
@@ -58,10 +59,10 @@ const ProductCard = ({ product, onAddToCart, index }: ProductCardProps) => {
         </motion.div>
       </div>
 
-      <div className="mt-4 text-center">
-        <h3 className="font-heading text-lg text-foreground">{product.name}</h3>
-        <p className="font-body text-sm text-muted-foreground mt-1">{product.description}</p>
-        <p className="font-heading text-lg text-gold mt-2">${product.price.toFixed(2)}</p>
+      <div className="mt-3 sm:mt-4 text-center">
+        <h3 className="font-heading text-lg sm:text-xl text-foreground">{product.name}</h3>
+        <p className="font-body text-xs sm:text-sm text-muted-foreground mt-1">{product.description}</p>
+        <p className="font-heading text-lg text-primary mt-2">${product.price.toFixed(2)}</p>
       </div>
     </motion.div>
   );
