@@ -6,22 +6,22 @@
 
 @layer base {
   :root {
-    --background: 33 30% 95%;
+    --background: 33 35% 90%;
     --foreground: 25 20% 15%;
 
-    --card: 35 35% 97%;
+    --card: 35 32% 93%;
     --card-foreground: 25 20% 15%;
 
-    --popover: 35 35% 97%;
+    --popover: 35 32% 93%;
     --popover-foreground: 25 20% 15%;
 
     --primary: 25 35% 38%;
     --primary-foreground: 35 30% 96%;
 
-    --secondary: 30 25% 90%;
+    --secondary: 30 28% 86%;
     --secondary-foreground: 25 20% 20%;
 
-    --muted: 30 15% 88%;
+    --muted: 30 20% 83%;
     --muted-foreground: 25 12% 45%;
 
     --accent: 18 40% 52%;
@@ -30,30 +30,31 @@
     --destructive: 0 60% 50%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 30 18% 85%;
-    --input: 30 18% 85%;
+    --border: 30 22% 80%;
+    --input: 30 22% 80%;
     --ring: 25 35% 38%;
 
     --radius: 0.75rem;
 
-    --warm-cream: 35 40% 94%;
-    --warm-sand: 30 25% 82%;
+    --warm-cream: 35 40% 91%;
+    --warm-sand: 30 25% 78%;
     --warm-tan: 25 22% 58%;
     --warm-rose: 18 30% 75%;
-    --warm-blush: 25 25% 91%;
+    --warm-blush: 25 25% 88%;
     --gold-accent: 32 55% 48%;
     --caramel: 25 40% 42%;
     --mocha: 20 25% 30%;
-    --latte: 33 30% 88%;
+    --latte: 33 30% 85%;
     --espresso: 20 30% 22%;
+    --lavender-cursor: 270 30% 72%;
 
-    --sidebar-background: 33 30% 95%;
+    --sidebar-background: 33 35% 90%;
     --sidebar-foreground: 25 20% 15%;
     --sidebar-primary: 25 35% 38%;
     --sidebar-primary-foreground: 35 30% 96%;
-    --sidebar-accent: 30 25% 90%;
+    --sidebar-accent: 30 28% 86%;
     --sidebar-accent-foreground: 25 20% 20%;
-    --sidebar-border: 30 18% 85%;
+    --sidebar-border: 30 22% 80%;
     --sidebar-ring: 25 35% 38%;
   }
 
@@ -83,6 +84,11 @@
 @layer base {
   * {
     @apply border-border;
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Ccircle cx='10' cy='10' r='8' fill='%23b39ddb' stroke='%239575cd' stroke-width='1.5'/%3E%3Ccircle cx='10' cy='10' r='3' fill='%237e57c2'/%3E%3C/svg%3E") 10 10, auto;
+  }
+
+  a, button, [role="button"], input, select, textarea, label {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='10' fill='%239575cd' stroke='%237e57c2' stroke-width='1.5'/%3E%3Ccircle cx='12' cy='12' r='4' fill='%23ede7f6'/%3E%3C/svg%3E") 12 12, pointer;
   }
 
   body {
@@ -103,15 +109,15 @@
   }
 
   .bg-warm-gradient {
-    background: linear-gradient(180deg, hsl(33 30% 95%), hsl(30 25% 90% / 0.6), hsl(35 40% 94% / 0.4));
+    background: linear-gradient(180deg, hsl(33 35% 90%), hsl(30 28% 86% / 0.6), hsl(35 40% 91% / 0.4));
   }
 
   .bg-hero-gradient {
-    background: linear-gradient(135deg, hsl(33 30% 95%) 0%, hsl(30 28% 88% / 0.7) 40%, hsl(25 25% 82% / 0.5) 100%);
+    background: linear-gradient(135deg, hsl(33 35% 90%) 0%, hsl(30 28% 85% / 0.7) 40%, hsl(25 25% 78% / 0.5) 100%);
   }
 
   .bg-section-alt {
-    background: linear-gradient(180deg, hsl(35 35% 97%), hsl(33 30% 93%));
+    background: linear-gradient(180deg, hsl(35 32% 93%), hsl(33 35% 88%));
   }
 
   .shadow-warm {

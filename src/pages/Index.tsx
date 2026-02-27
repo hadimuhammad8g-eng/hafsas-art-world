@@ -1,4 +1,5 @@
 import { useState, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import ProductSection from "@/components/ProductSection";
@@ -6,6 +7,7 @@ import BestSellingSection from "@/components/BestSellingSection";
 import CustomerReviews from "@/components/CustomerReviews";
 import CustomOrderSection from "@/components/CustomOrderSection";
 import CartDrawer, { CartItem } from "@/components/CartDrawer";
+import FloatingFlowers from "@/components/FloatingFlowers";
 import Footer from "@/components/Footer";
 import { Product } from "@/components/ProductCard";
 import { paintings, crochetItems, bestSellers } from "@/data/products";
@@ -14,6 +16,7 @@ import { toast } from "sonner";
 const Index = () => {
   const [cartOpen, setCartOpen] = useState(false);
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const navigate = useNavigate();
 
   const addToCart = useCallback((product: Product) => {
     setCartItems((prev) => {
@@ -44,8 +47,14 @@ const Index = () => {
 
   const cartCount = cartItems.reduce((sum, i) => sum + i.quantity, 0);
 
+  const handleCheckout = useCallback(() => {
+    setCartOpen(false);
+    navigate("/checkout", { state: { items: cartItems } });
+  }, [cartItems, navigate]);
+
   return (
     <div className="min-h-screen bg-background">
+      <FloatingFlowers />
       <Navbar cartCount={cartCount} onCartClick={() => setCartOpen(true)} />
       <HeroSection />
 
@@ -77,6 +86,7 @@ const Index = () => {
         items={cartItems}
         onUpdateQuantity={updateQuantity}
         onRemove={removeItem}
+        onCheckout={handleCheckout}
       />
     </div>
   );
