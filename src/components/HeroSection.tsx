@@ -11,8 +11,8 @@ const HeroSection = () => {
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0">
         <img src={heroBg} alt="Art studio" className="w-full h-full object-cover" loading="eager" />
-        <div className="absolute inset-0 bg-hero-gradient opacity-80" />
-        <div className="absolute inset-0 bg-background/40 backdrop-blur-[1px]" />
+        <div className="absolute inset-0 bg-hero-gradient opacity-85" />
+        <div className="absolute inset-0 bg-background/50" />
       </div>
 
       <div className="relative z-10 text-center px-4 sm:px-6 max-w-3xl mx-auto pt-20">
@@ -22,7 +22,7 @@ const HeroSection = () => {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.1, duration: 0.6 }}
-          className="w-20 h-20 sm:w-28 sm:h-28 mx-auto mb-6 rounded-full shadow-lavender object-cover"
+          className="w-20 h-20 sm:w-28 sm:h-28 mx-auto mb-6 rounded-full shadow-gold object-cover border-2 border-warm-sand"
         />
 
         <motion.p
@@ -60,13 +60,13 @@ const HeroSection = () => {
         >
           <button
             onClick={() => scrollTo("paintings")}
-            className="px-6 sm:px-8 py-3 sm:py-3.5 bg-primary text-primary-foreground font-body text-xs sm:text-sm uppercase tracking-widest rounded-lg hover:opacity-90 transition-all shadow-lavender"
+            className="px-6 sm:px-8 py-3 sm:py-3.5 bg-primary text-primary-foreground font-body text-xs sm:text-sm uppercase tracking-widest rounded-lg hover:opacity-90 transition-all shadow-gold"
           >
             Explore Collection
           </button>
           <button
             onClick={() => scrollTo("custom")}
-            className="px-6 sm:px-8 py-3 sm:py-3.5 border border-primary/30 text-foreground font-body text-xs sm:text-sm uppercase tracking-widest rounded-lg hover:bg-lavender-soft transition-colors"
+            className="px-6 sm:px-8 py-3 sm:py-3.5 border border-primary/30 text-foreground font-body text-xs sm:text-sm uppercase tracking-widest rounded-lg hover:bg-secondary transition-colors"
           >
             Custom Order
           </button>
@@ -79,11 +79,11 @@ const HeroSection = () => {
         transition={{ delay: 1.4, duration: 1 }}
         className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2"
       >
-        <div className="w-5 h-8 border-2 border-lavender/50 rounded-full flex justify-center pt-1.5">
+        <div className="w-5 h-8 border-2 border-warm-tan/50 rounded-full flex justify-center pt-1.5">
           <motion.div
             animate={{ y: [0, 8, 0] }}
             transition={{ repeat: Infinity, duration: 1.5 }}
-            className="w-1 h-1 rounded-full bg-lavender"
+            className="w-1 h-1 rounded-full bg-warm-tan"
           />
         </div>
       </motion.div>

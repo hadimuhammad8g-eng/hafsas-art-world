@@ -2,7 +2,7 @@ import { Heart } from "lucide-react";
 import logo from "@/assets/logo.png";
 
 const Footer = () => (
-  <footer className="py-10 sm:py-12 px-4 sm:px-6 border-t border-border bg-lavender-gradient">
+  <footer className="py-10 sm:py-12 px-4 sm:px-6 border-t border-border bg-section-alt">
     <div className="container mx-auto max-w-6xl">
       <div className="flex flex-col md:flex-row items-center justify-between gap-6">
         <div className="flex items-center gap-3 text-center md:text-left">

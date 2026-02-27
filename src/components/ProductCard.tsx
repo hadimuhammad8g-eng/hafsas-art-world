@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ShoppingBag, Eye } from "lucide-react";
+import { ShoppingBag } from "lucide-react";
 import { useState } from "react";
 
 export interface Product {
@@ -22,47 +22,43 @@ const ProductCard = ({ product, onAddToCart, index }: ProductCardProps) => {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ delay: index * 0.1, duration: 0.5 }}
+      viewport={{ once: true, margin: "-30px" }}
+      transition={{ delay: index * 0.05, duration: 0.4 }}
       className="group"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <div className="relative overflow-hidden rounded-lg bg-card shadow-warm hover:shadow-lavender transition-shadow duration-500">
-        <div className="aspect-[3/4] overflow-hidden">
+      <div className="relative overflow-hidden rounded-lg bg-card shadow-warm hover:shadow-warm-lg transition-shadow duration-400">
+        <div className="aspect-square overflow-hidden">
           <img
             src={product.image}
             alt={product.name}
             loading="lazy"
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
         </div>
 
-        {/* Hover overlay */}
         <motion.div
           initial={false}
           animate={{ opacity: hovered ? 1 : 0 }}
-          className="absolute inset-0 bg-primary/15 backdrop-blur-[1px] flex items-center justify-center gap-3"
+          className="absolute inset-0 bg-foreground/10 flex items-center justify-center"
         >
           <button
             onClick={() => onAddToCart(product)}
-            className="p-3 bg-card rounded-full shadow-warm-lg hover:scale-110 transition-transform"
+            className="p-2.5 bg-card rounded-full shadow-warm-lg hover:scale-110 transition-transform"
             aria-label="Add to cart"
           >
-            <ShoppingBag className="w-5 h-5 text-foreground" />
-          </button>
-          <button className="p-3 bg-card rounded-full shadow-warm-lg hover:scale-110 transition-transform" aria-label="Quick view">
-            <Eye className="w-5 h-5 text-foreground" />
+            <ShoppingBag className="w-4 h-4 text-foreground" />
           </button>
         </motion.div>
       </div>
 
-      <div className="mt-3 sm:mt-4 text-center">
-        <h3 className="font-heading text-lg sm:text-xl text-foreground">{product.name}</h3>
-        <p className="font-body text-xs sm:text-sm text-muted-foreground mt-1">{product.description}</p>
-        <p className="font-heading text-lg text-primary mt-2">${product.price.toFixed(2)}</p>
+      <div className="mt-2.5 text-center">
+        <h3 className="font-heading text-sm sm:text-base text-foreground">{product.name}</h3>
+        <p className="font-body text-xs text-muted-foreground mt-0.5 line-clamp-1">{product.description}</p>
+        <p className="font-heading text-sm sm:text-base text-primary mt-1">${product.price.toFixed(2)}</p>
       </div>
     </motion.div>
   );
