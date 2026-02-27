@@ -13,9 +13,10 @@ interface CartDrawerProps {
   items: CartItem[];
   onUpdateQuantity: (id: string, delta: number) => void;
   onRemove: (id: string) => void;
+  onCheckout?: () => void;
 }
 
-const CartDrawer = ({ open, onClose, items, onUpdateQuantity, onRemove }: CartDrawerProps) => {
+const CartDrawer = ({ open, onClose, items, onUpdateQuantity, onRemove, onCheckout }: CartDrawerProps) => {
   const total = items.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
 
   return (
@@ -81,7 +82,10 @@ const CartDrawer = ({ open, onClose, items, onUpdateQuantity, onRemove }: CartDr
                   <span className="font-body text-muted-foreground">Total</span>
                   <span className="font-heading text-xl text-foreground">${total.toFixed(2)}</span>
                 </div>
-                <button className="w-full py-3.5 bg-primary text-primary-foreground font-body text-sm uppercase tracking-widest rounded-sm hover:opacity-90 transition-opacity">
+                <button
+                  onClick={onCheckout}
+                  className="w-full py-3.5 bg-primary text-primary-foreground font-body text-sm uppercase tracking-widest rounded-sm hover:opacity-90 transition-opacity"
+                >
                   Checkout
                 </button>
               </div>
