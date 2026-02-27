@@ -18,8 +18,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        heading: ['"Cormorant Garamond"', 'Georgia', 'serif'],
-        body: ['"Nunito Sans"', 'system-ui', 'sans-serif'],
+        heading: ['"Playfair Display"', 'Georgia', 'serif'],
+        body: ['"DM Sans"', 'system-ui', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -63,14 +63,10 @@ export default {
           blush: "hsl(var(--warm-blush))",
         },
         gold: "hsl(var(--gold-accent))",
-        lavender: {
-          DEFAULT: "hsl(var(--lavender))",
-          soft: "hsl(var(--lavender-soft))",
-        },
-        pink: {
-          soft: "hsl(var(--pink-soft))",
-          muted: "hsl(var(--pink-muted))",
-        },
+        caramel: "hsl(var(--caramel))",
+        mocha: "hsl(var(--mocha))",
+        latte: "hsl(var(--latte))",
+        espresso: "hsl(var(--espresso))",
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
@@ -108,10 +104,6 @@ export default {
           from: { opacity: "0", transform: "scale(0.95)" },
           to: { opacity: "1", transform: "scale(1)" },
         },
-        "float": {
-          "0%, 100%": { transform: "translateY(0)" },
-          "50%": { transform: "translateY(-10px)" },
-        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -119,7 +111,6 @@ export default {
         "fade-in-up": "fade-in-up 0.7s ease-out forwards",
         "fade-in": "fade-in 0.5s ease-out forwards",
         "scale-in": "scale-in 0.5s ease-out forwards",
-        "float": "float 6s ease-in-out infinite",
       },
     },
   },

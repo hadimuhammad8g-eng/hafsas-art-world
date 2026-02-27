@@ -1,15 +1,15 @@
-import { useState, useCallback, lazy, Suspense } from "react";
+import { useState, useCallback } from "react";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import ProductSection from "@/components/ProductSection";
+import BestSellingSection from "@/components/BestSellingSection";
+import CustomerReviews from "@/components/CustomerReviews";
 import CustomOrderSection from "@/components/CustomOrderSection";
 import CartDrawer, { CartItem } from "@/components/CartDrawer";
 import Footer from "@/components/Footer";
 import { Product } from "@/components/ProductCard";
-import { paintings, crochetItems } from "@/data/products";
+import { paintings, crochetItems, bestSellers } from "@/data/products";
 import { toast } from "sonner";
-
-const ScrollScene = lazy(() => import("@/components/ScrollScene"));
 
 const Index = () => {
   const [cartOpen, setCartOpen] = useState(false);
@@ -49,6 +49,8 @@ const Index = () => {
       <Navbar cartCount={cartCount} onCartClick={() => setCartOpen(true)} />
       <HeroSection />
 
+      <BestSellingSection products={bestSellers} onAddToCart={addToCart} />
+
       <ProductSection
         id="paintings"
         title="Paintings"
@@ -56,10 +58,6 @@ const Index = () => {
         products={paintings}
         onAddToCart={addToCart}
       />
-
-      <Suspense fallback={<div className="h-[400px]" />}>
-        <ScrollScene />
-      </Suspense>
 
       <ProductSection
         id="crochet"
@@ -69,6 +67,7 @@ const Index = () => {
         onAddToCart={addToCart}
       />
 
+      <CustomerReviews />
       <CustomOrderSection />
       <Footer />
 
