@@ -8,7 +8,7 @@ interface BestSellingSectionProps {
 
 const BestSellingSection = ({ products, onAddToCart }: BestSellingSectionProps) => {
   return (
-    <section className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 bg-section-alt bg-secondary">
+    <section className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 bg-section-alt bg-destructive">
       <div className="container mx-auto max-w-6xl bg-[#a9824c]/[0.37]">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
