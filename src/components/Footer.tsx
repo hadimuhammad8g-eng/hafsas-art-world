@@ -1,4 +1,5 @@
 import { Heart } from "lucide-react";
+import { Link } from "react-router-dom";
 import logo from "@/assets/logo.png";
 
 const Footer = () => (
@@ -20,10 +21,13 @@ const Footer = () => (
           ))}
         </div>
       </div>
-      <div className="mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-border text-center">
-        <p className="font-body text-xs text-muted-foreground flex items-center justify-center gap-1">
+      <div className="mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-2">
+        <p className="font-body text-xs text-muted-foreground flex items-center gap-1">
           Made with <Heart className="w-3 h-3 text-accent fill-accent" /> © 2026 Hafsa's Art World
         </p>
+        <Link to="/admin/login" className="font-body text-xs text-muted-foreground/50 hover:text-muted-foreground transition-colors">
+          Admin
+        </Link>
       </div>
     </div>
   </footer>

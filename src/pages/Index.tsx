@@ -10,13 +10,18 @@ import CartDrawer, { CartItem } from "@/components/CartDrawer";
 import FloatingFlowers from "@/components/FloatingFlowers";
 import Footer from "@/components/Footer";
 import { Product } from "@/components/ProductCard";
-import { paintings, crochetItems, bestSellers } from "@/data/products";
+import { useProducts } from "@/hooks/useProducts";
 import { toast } from "sonner";
 
 const Index = () => {
   const [cartOpen, setCartOpen] = useState(false);
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const navigate = useNavigate();
+  const { data: productData } = useProducts();
+
+  const paintings = productData?.paintings ?? [];
+  const crochetItems = productData?.crochetItems ?? [];
+  const bestSellers = productData?.bestSellers ?? [];
 
   const addToCart = useCallback((product: Product) => {
     setCartItems((prev) => {
@@ -53,7 +58,7 @@ const Index = () => {
   }, [cartItems, navigate]);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-page-pattern">
       <FloatingFlowers />
       <Navbar cartCount={cartCount} onCartClick={() => setCartOpen(true)} />
       <HeroSection />
