@@ -30,8 +30,8 @@ const reviews = [
 
 const CustomerReviews = () => {
   return (
-    <section className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 bg-sidebar-primary border-primary-foreground">
-      <div className="container mx-auto max-w-6xl">
+    <section className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 border-primary bg-[#a9824c]/[0.49]">
+      <div className="container mx-auto max-w-6xl bg-[#a9824c]/[0.42]">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -39,7 +39,7 @@ const CustomerReviews = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-10 sm:mb-14">
 
-          <p className="font-body text-xs sm:text-sm uppercase tracking-[0.3em] text-muted-foreground mb-2 sm:mb-3">
+          <p className="font-body text-xs sm:text-sm uppercase tracking-[0.3em] mb-2 sm:mb-3 text-secondary-foreground">
             Testimonials
           </p>
           <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-semibold text-foreground mb-3 sm:mb-4 italic">
@@ -56,7 +56,7 @@ const CustomerReviews = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.1, duration: 0.5 }}
-            className="bg-card rounded-lg p-5 sm:p-6 shadow-warm hover:shadow-warm-lg transition-shadow duration-300">
+            className="rounded-lg p-5 sm:p-6 shadow-warm hover:shadow-warm-lg transition-shadow duration-300 py-[10px] bg-primary-foreground">
 
               <Quote className="w-6 h-6 text-gold mb-3 opacity-60" />
               <p className="font-body text-sm text-muted-foreground leading-relaxed mb-4">

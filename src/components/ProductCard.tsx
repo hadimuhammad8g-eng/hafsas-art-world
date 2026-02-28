@@ -28,28 +28,28 @@ const ProductCard = ({ product, onAddToCart, index }: ProductCardProps) => {
       transition={{ delay: index * 0.05, duration: 0.4 }}
       className="group"
       onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-    >
+      onMouseLeave={() => setHovered(false)}>
+
       <div className="relative overflow-hidden rounded-lg bg-card shadow-warm hover:shadow-warm-lg transition-shadow duration-400">
         <div className="aspect-square overflow-hidden">
           <img
             src={product.image}
             alt={product.name}
             loading="lazy"
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-          />
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+
         </div>
 
         <motion.div
           initial={false}
           animate={{ opacity: hovered ? 1 : 0 }}
-          className="absolute inset-0 bg-foreground/10 flex items-center justify-center"
-        >
+          className="absolute inset-0 bg-foreground/10 items-center justify-center flex flex-row">
+
           <button
             onClick={() => onAddToCart(product)}
             className="p-2.5 bg-card rounded-full shadow-warm-lg hover:scale-110 transition-transform"
-            aria-label="Add to cart"
-          >
+            aria-label="Add to cart">
+
             <ShoppingBag className="w-4 h-4 text-foreground" />
           </button>
         </motion.div>
@@ -60,8 +60,8 @@ const ProductCard = ({ product, onAddToCart, index }: ProductCardProps) => {
         <p className="font-body text-xs text-muted-foreground mt-0.5 line-clamp-1">{product.description}</p>
         <p className="font-heading text-sm sm:text-base text-primary mt-1">${product.price.toFixed(2)}</p>
       </div>
-    </motion.div>
-  );
+    </motion.div>);
+
 };
 
 export default ProductCard;
