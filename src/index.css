@@ -120,6 +120,14 @@
     background: linear-gradient(180deg, hsl(35 32% 93%), hsl(33 35% 88%));
   }
 
+  .bg-page-pattern {
+    background-color: hsl(var(--background));
+    background-image:
+      radial-gradient(circle at 20% 50%, hsl(32 55% 48% / 0.06) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, hsl(25 40% 42% / 0.05) 0%, transparent 40%),
+      radial-gradient(circle at 60% 80%, hsl(18 40% 52% / 0.04) 0%, transparent 45%);
+  }
+
   .shadow-warm {
     box-shadow: 0 4px 20px -4px hsl(25 20% 30% / 0.08);
   }
