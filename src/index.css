@@ -6,89 +6,92 @@
 
 @layer base {
   :root {
-    --background: 33 35% 90%;
-    --foreground: 25 20% 15%;
+    --background: 30 67% 94%;
+    --foreground: 13 43% 15%;
 
-    --card: 35 32% 93%;
-    --card-foreground: 25 20% 15%;
+    --card: 11 38% 80%;
+    --card-foreground: 13 43% 15%;
 
-    --popover: 35 32% 93%;
-    --popover-foreground: 25 20% 15%;
+    --popover: 11 38% 82%;
+    --popover-foreground: 13 43% 15%;
 
-    --primary: 25 35% 38%;
-    --primary-foreground: 35 30% 96%;
+    --primary: 27 45% 30%;
+    --primary-foreground: 30 67% 94%;
 
-    --secondary: 30 28% 86%;
-    --secondary-foreground: 25 20% 20%;
+    --secondary: 13 33% 67%;
+    --secondary-foreground: 13 43% 18%;
 
-    --muted: 30 20% 83%;
-    --muted-foreground: 25 12% 45%;
+    --muted: 11 28% 78%;
+    --muted-foreground: 19 20% 40%;
 
-    --accent: 18 40% 52%;
-    --accent-foreground: 35 30% 96%;
+    --accent: 19 20% 47%;
+    --accent-foreground: 30 67% 94%;
 
     --destructive: 0 60% 50%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 30 22% 80%;
-    --input: 30 22% 80%;
-    --ring: 25 35% 38%;
+    --border: 11 25% 72%;
+    --input: 11 25% 72%;
+    --ring: 27 45% 30%;
 
     --radius: 0.75rem;
 
-    --warm-cream: 35 40% 91%;
-    --warm-sand: 30 25% 78%;
-    --warm-tan: 25 22% 58%;
-    --warm-rose: 18 30% 75%;
-    --warm-blush: 25 25% 88%;
-    --gold-accent: 32 55% 48%;
-    --caramel: 25 40% 42%;
-    --mocha: 20 25% 30%;
-    --latte: 33 30% 85%;
-    --espresso: 20 30% 22%;
-    --lavender-cursor: 270 30% 72%;
+    --warm-cream: 30 67% 94%;
+    --warm-sand: 13 33% 67%;
+    --warm-tan: 19 20% 47%;
+    --warm-rose: 13 33% 67%;
+    --warm-blush: 11 38% 80%;
+    --gold-accent: 27 45% 30%;
+    --caramel: 13 43% 22%;
+    --mocha: 19 20% 35%;
+    --latte: 11 38% 80%;
+    --espresso: 13 43% 22%;
 
-    --sidebar-background: 33 35% 90%;
-    --sidebar-foreground: 25 20% 15%;
-    --sidebar-primary: 25 35% 38%;
-    --sidebar-primary-foreground: 35 30% 96%;
-    --sidebar-accent: 30 28% 86%;
-    --sidebar-accent-foreground: 25 20% 20%;
-    --sidebar-border: 30 22% 80%;
-    --sidebar-ring: 25 35% 38%;
+    --header-bg: 27 45% 30%;
+    --footer-bg: 13 43% 22%;
+    --container-bg: 11 38% 80%;
+
+    --sidebar-background: 30 67% 94%;
+    --sidebar-foreground: 13 43% 15%;
+    --sidebar-primary: 27 45% 30%;
+    --sidebar-primary-foreground: 30 67% 94%;
+    --sidebar-accent: 13 33% 67%;
+    --sidebar-accent-foreground: 13 43% 18%;
+    --sidebar-border: 11 25% 72%;
+    --sidebar-ring: 27 45% 30%;
   }
 
   .dark {
-    --background: 25 18% 8%;
-    --foreground: 33 25% 90%;
-    --card: 25 15% 12%;
-    --card-foreground: 33 25% 90%;
-    --popover: 25 15% 12%;
-    --popover-foreground: 33 25% 90%;
-    --primary: 30 35% 60%;
-    --primary-foreground: 25 18% 8%;
-    --secondary: 25 12% 18%;
-    --secondary-foreground: 33 25% 90%;
-    --muted: 25 10% 18%;
-    --muted-foreground: 30 10% 55%;
-    --accent: 18 35% 45%;
-    --accent-foreground: 33 25% 90%;
+    --background: 13 30% 8%;
+    --foreground: 30 40% 90%;
+    --card: 13 25% 14%;
+    --card-foreground: 30 40% 90%;
+    --popover: 13 25% 14%;
+    --popover-foreground: 30 40% 90%;
+    --primary: 27 40% 55%;
+    --primary-foreground: 13 30% 8%;
+    --secondary: 13 20% 20%;
+    --secondary-foreground: 30 40% 90%;
+    --muted: 13 15% 20%;
+    --muted-foreground: 19 15% 55%;
+    --accent: 19 25% 40%;
+    --accent-foreground: 30 40% 90%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
-    --border: 25 12% 20%;
-    --input: 25 12% 20%;
-    --ring: 30 35% 60%;
+    --border: 13 15% 22%;
+    --input: 13 15% 22%;
+    --ring: 27 40% 55%;
   }
 }
 
 @layer base {
   * {
     @apply border-border;
-    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Ccircle cx='10' cy='10' r='8' fill='%23b39ddb' stroke='%239575cd' stroke-width='1.5'/%3E%3Ccircle cx='10' cy='10' r='3' fill='%237e57c2'/%3E%3C/svg%3E") 10 10, auto;
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='24' viewBox='0 0 20 24'%3E%3Cpath d='M4 2 L4 18 L8 14 L12 20 L14 19 L10 13 L16 13 Z' fill='%23704929' stroke='%234E2A20' stroke-width='1'/%3E%3C/svg%3E") 4 2, auto;
   }
 
   a, button, [role="button"], input, select, textarea, label {
-    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='10' fill='%239575cd' stroke='%237e57c2' stroke-width='1.5'/%3E%3Ccircle cx='12' cy='12' r='4' fill='%23ede7f6'/%3E%3C/svg%3E") 12 12, pointer;
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='26' viewBox='0 0 22 26'%3E%3Cpath d='M5 2 L5 20 L9 16 L13 22 L15 21 L11 15 L17 15 Z' fill='%234E2A20' stroke='%23704929' stroke-width='1.2'/%3E%3C/svg%3E") 5 2, pointer;
   }
 
   body {
@@ -109,23 +112,23 @@
   }
 
   .bg-warm-gradient {
-    background: linear-gradient(180deg, hsl(33 35% 90%), hsl(30 28% 86% / 0.6), hsl(35 40% 91% / 0.4));
+    background: linear-gradient(180deg, hsl(30 67% 94%), hsl(11 38% 80% / 0.5), hsl(13 33% 67% / 0.3));
   }
 
   .bg-hero-gradient {
-    background: linear-gradient(135deg, hsl(33 35% 90%) 0%, hsl(30 28% 85% / 0.7) 40%, hsl(25 25% 78% / 0.5) 100%);
+    background: linear-gradient(135deg, hsl(30 67% 94%) 0%, hsl(11 38% 80% / 0.6) 40%, hsl(13 33% 67% / 0.4) 100%);
   }
 
   .bg-section-alt {
-    background: linear-gradient(180deg, hsl(35 32% 93%), hsl(33 35% 88%));
+    background: linear-gradient(180deg, hsl(30 67% 94%), hsl(11 38% 82%));
   }
 
   .bg-page-pattern {
     background-color: hsl(var(--background));
     background-image:
-      radial-gradient(circle at 20% 50%, hsl(32 55% 48% / 0.06) 0%, transparent 50%),
-      radial-gradient(circle at 80% 20%, hsl(25 40% 42% / 0.05) 0%, transparent 40%),
-      radial-gradient(circle at 60% 80%, hsl(18 40% 52% / 0.04) 0%, transparent 45%);
+      radial-gradient(circle at 20% 50%, hsl(27 45% 30% / 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, hsl(13 43% 22% / 0.04) 0%, transparent 40%),
+      radial-gradient(circle at 60% 80%, hsl(19 20% 47% / 0.04) 0%, transparent 45%);
   }
 
   .shadow-warm {
