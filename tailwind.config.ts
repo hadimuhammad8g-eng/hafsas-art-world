@@ -67,6 +67,9 @@ export default {
         mocha: "hsl(var(--mocha))",
         latte: "hsl(var(--latte))",
         espresso: "hsl(var(--espresso))",
+        "header-bg": "hsl(var(--header-bg))",
+        "footer-bg": "hsl(var(--footer-bg))",
+        "container-bg": "hsl(var(--container-bg))",
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
