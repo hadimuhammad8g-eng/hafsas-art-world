@@ -4,7 +4,6 @@ import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import ProductSection from "@/components/ProductSection";
 import BestSellingSection from "@/components/BestSellingSection";
-import CustomerReviews from "@/components/CustomerReviews";
 import CustomOrderSection from "@/components/CustomOrderSection";
 import CartDrawer, { CartItem } from "@/components/CartDrawer";
 import FloatingFlowers from "@/components/FloatingFlowers";
@@ -81,7 +80,6 @@ const Index = () => {
         onAddToCart={addToCart}
       />
 
-      <CustomerReviews />
       <CustomOrderSection />
       <Footer />
 

@@ -12,7 +12,7 @@ interface ProductSectionProps {
 const ProductSection = ({ id, title, subtitle, products, onAddToCart }: ProductSectionProps) => {
   return (
     <section id={id} className="py-16 sm:py-20 md:py-24 px-4 sm:px-6">
-      <div className="container mx-auto max-w-6xl bg-container-bg/40 rounded-xl p-6 sm:p-8">
+      <div className="container mx-auto max-w-6xl bg-container-bg/40 rounded-xl p-6 sm:p-8 border border-border shadow-warm">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
