@@ -11,14 +11,14 @@ interface PetalConfig {
 }
 
 const petalConfigs: PetalConfig[] = [
-  { side: "left", top: 10, size: 32, speed: 0.12, swayAmount: 25, opacity: 0.3 },
-  { side: "right", top: 20, size: 28, speed: 0.09, swayAmount: 18, opacity: 0.25 },
-  { side: "left", top: 35, size: 36, speed: 0.14, swayAmount: 30, opacity: 0.2 },
-  { side: "right", top: 50, size: 24, speed: 0.1, swayAmount: 15, opacity: 0.35 },
-  { side: "left", top: 65, size: 30, speed: 0.11, swayAmount: 22, opacity: 0.28 },
-  { side: "right", top: 75, size: 26, speed: 0.08, swayAmount: 20, opacity: 0.22 },
-  { side: "left", top: 85, size: 34, speed: 0.13, swayAmount: 28, opacity: 0.18 },
-  { side: "right", top: 90, size: 22, speed: 0.07, swayAmount: 12, opacity: 0.3 },
+  { side: "left", top: 10, size: 32, speed: 0.12, swayAmount: 25, opacity: 0.7 },
+  { side: "right", top: 20, size: 28, speed: 0.09, swayAmount: 18, opacity: 0.65 },
+  { side: "left", top: 35, size: 36, speed: 0.14, swayAmount: 30, opacity: 0.6 },
+  { side: "right", top: 50, size: 24, speed: 0.1, swayAmount: 15, opacity: 0.75 },
+  { side: "left", top: 65, size: 30, speed: 0.11, swayAmount: 22, opacity: 0.65 },
+  { side: "right", top: 75, size: 26, speed: 0.08, swayAmount: 20, opacity: 0.6 },
+  { side: "left", top: 85, size: 34, speed: 0.13, swayAmount: 28, opacity: 0.55 },
+  { side: "right", top: 90, size: 22, speed: 0.07, swayAmount: 12, opacity: 0.7 },
 ];
 
 const Flower = ({ size, opacity }: { size: number; opacity: number }) => (
@@ -30,11 +30,11 @@ const Flower = ({ size, opacity }: { size: number; opacity: number }) => (
         cy="10"
         rx="6"
         ry="10"
-        fill={`hsl(25 30% 70% / ${opacity})`}
+        fill={`hsl(13 43% 22% / ${opacity})`}
         transform={`rotate(${angle} 20 20)`}
       />
     ))}
-    <circle cx="20" cy="20" r="4" fill={`hsl(32 55% 48% / ${opacity + 0.15})`} />
+    <circle cx="20" cy="20" r="4" fill={`hsl(27 45% 30% / ${opacity + 0.15})`} />
   </svg>
 );
 
