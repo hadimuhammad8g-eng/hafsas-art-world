@@ -57,7 +57,7 @@ const CartDrawer = ({ open, onClose, items, onUpdateQuantity, onRemove, onChecko
                     <img src={item.product.image} alt={item.product.name} className="w-20 h-20 object-cover rounded-sm" />
                     <div className="flex-1">
                       <h3 className="font-heading text-sm text-foreground">{item.product.name}</h3>
-                      <p className="font-body text-sm text-gold mt-1">${item.product.price.toFixed(2)}</p>
+                      <p className="font-body text-sm text-gold mt-1">PKR {item.product.price.toLocaleString()}</p>
                       <div className="flex items-center gap-3 mt-2">
                         <button onClick={() => onUpdateQuantity(item.product.id, -1)} className="p-1 hover:bg-secondary rounded transition-colors">
                           <Minus className="w-3 h-3 text-foreground" />
@@ -80,7 +80,7 @@ const CartDrawer = ({ open, onClose, items, onUpdateQuantity, onRemove, onChecko
               <div className="p-6 border-t border-border space-y-4">
                 <div className="flex justify-between">
                   <span className="font-body text-muted-foreground">Total</span>
-                  <span className="font-heading text-xl text-foreground">${total.toFixed(2)}</span>
+                  <span className="font-heading text-xl text-foreground">PKR {total.toLocaleString()}</span>
                 </div>
                 <button
                   onClick={onCheckout}

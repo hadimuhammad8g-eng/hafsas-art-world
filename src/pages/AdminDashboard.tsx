@@ -240,7 +240,7 @@ const AdminDashboard = () => {
                       />
                     </div>
                     <div>
-                      <label className="font-body text-xs text-muted-foreground block mb-1.5">Price ($)</label>
+                      <label className="font-body text-xs text-muted-foreground block mb-1.5">Price (PKR)</label>
                       <input
                         type="number"
                         step="0.01"
@@ -351,7 +351,7 @@ const AdminDashboard = () => {
                       <h3 className="font-heading text-sm text-foreground">{p.name}</h3>
                       <p className="font-body text-xs text-muted-foreground capitalize">{p.category}</p>
                     </div>
-                    <p className="font-heading text-sm text-primary">${p.price}</p>
+                    <p className="font-heading text-sm text-primary">PKR {p.price.toLocaleString()}</p>
                   </div>
                   {p.is_best_seller && (
                     <span className="inline-block mt-2 px-2 py-0.5 bg-accent/10 text-accent text-xs font-body rounded">

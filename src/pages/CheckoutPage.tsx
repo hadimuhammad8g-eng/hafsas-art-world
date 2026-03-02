@@ -51,7 +51,7 @@ const CheckoutPage = () => {
           </div>
           <h2 className="font-heading text-2xl text-foreground mb-3 italic">Order Confirmed!</h2>
           <p className="font-body text-sm text-muted-foreground mb-2">
-            Thank you for your order of <span className="font-semibold text-foreground">${total.toFixed(2)}</span>
+            Thank you for your order of <span className="font-semibold text-foreground">PKR {total.toLocaleString()}</span>
           </p>
           <p className="font-body text-sm text-muted-foreground mb-6">
             Payment via <span className="capitalize font-semibold text-foreground">{method}</span>. We'll send you payment details on your phone.
@@ -148,7 +148,7 @@ const CheckoutPage = () => {
               type="submit"
               className="w-full py-3.5 bg-primary text-primary-foreground font-body text-sm uppercase tracking-widest rounded-lg hover:opacity-90 transition-all shadow-gold"
             >
-              Place Order — ${total.toFixed(2)}
+              Place Order — PKR {total.toLocaleString()}
             </button>
           </motion.form>
 
@@ -169,14 +169,14 @@ const CheckoutPage = () => {
                       <p className="font-heading text-sm text-foreground">{item.product.name}</p>
                       <p className="font-body text-xs text-muted-foreground">Qty: {item.quantity}</p>
                     </div>
-                    <p className="font-body text-sm text-foreground">${(item.product.price * item.quantity).toFixed(2)}</p>
+                    <p className="font-body text-sm text-foreground">PKR {(item.product.price * item.quantity).toLocaleString()}</p>
                   </div>
                 ))}
               </div>
               <div className="border-t border-border pt-4 space-y-2">
                 <div className="flex justify-between font-body text-sm">
                   <span className="text-muted-foreground">Subtotal</span>
-                  <span className="text-foreground">${total.toFixed(2)}</span>
+                   <span className="text-foreground">PKR {total.toLocaleString()}</span>
                 </div>
                 <div className="flex justify-between font-body text-sm">
                   <span className="text-muted-foreground">Shipping</span>
@@ -184,7 +184,7 @@ const CheckoutPage = () => {
                 </div>
                 <div className="flex justify-between font-heading text-lg pt-2 border-t border-border">
                   <span className="text-foreground">Total</span>
-                  <span className="text-foreground">${total.toFixed(2)}</span>
+                  <span className="text-foreground">PKR {total.toLocaleString()}</span>
                 </div>
               </div>
             </div>

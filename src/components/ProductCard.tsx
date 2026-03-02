@@ -58,7 +58,7 @@ const ProductCard = ({ product, onAddToCart, index }: ProductCardProps) => {
       <div className="mt-2.5 text-center">
         <h3 className="font-heading text-sm sm:text-base text-foreground">{product.name}</h3>
         <p className="font-body text-xs text-muted-foreground mt-0.5 line-clamp-1">{product.description}</p>
-        <p className="font-heading text-sm sm:text-base text-primary mt-1">${product.price.toFixed(2)}</p>
+        <p className="font-heading text-sm sm:text-base text-primary mt-1">PKR {product.price.toLocaleString()}</p>
       </div>
     </motion.div>);
 
