@@ -28,7 +28,7 @@ const emptyForm: ProductForm = {
 };
 
 const AdminDashboard = () => {
-  const { user, isAdmin, loading: authLoading, signOut } = useAuth();
+  const { user, loading: authLoading, signOut } = useAuth();
   const navigate = useNavigate();
   const { data, isLoading } = useProducts();
   const addProduct = useAddProduct();
@@ -52,18 +52,6 @@ const AdminDashboard = () => {
   if (!user) {
     navigate("/admin/login");
     return null;
-  }
-
-  if (!isAdmin) {
-    return (
-      <div className="min-h-screen bg-page-pattern flex items-center justify-center px-4">
-        <div className="text-center bg-card p-8 rounded-xl shadow-warm-lg">
-          <h2 className="font-heading text-xl text-foreground mb-2">Access Denied</h2>
-          <p className="font-body text-sm text-muted-foreground mb-4">You don't have admin privileges.</p>
-          <button onClick={() => navigate("/")} className="font-body text-sm text-primary underline">Back to Shop</button>
-        </div>
-      </div>
-    );
   }
 
   const products = data?.raw || [];

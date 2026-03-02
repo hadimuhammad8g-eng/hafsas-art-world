@@ -27,30 +27,34 @@ export const useProducts = () => {
   return useQuery({
     queryKey: ["products"],
     queryFn: async () => {
-      const { data, error } = await supabase
-        .from("products")
-        .select("*")
-        .order("sort_order", { ascending: true });
+      try {
+        const { data, error } = await supabase
+          .from("products")
+          .select("*")
+          .order("sort_order", { ascending: true });
 
-      if (error) throw error;
+        if (error) throw error;
 
-      const products = (data as DbProduct[]) || [];
+        const products = (data as DbProduct[]) || [];
 
-      // If no products in DB, fall back to static data
-      if (products.length === 0) {
-        return {
-          paintings,
-          crochetItems,
-          bestSellers,
-          raw: [] as DbProduct[],
-        };
+        if (products.length > 0) {
+          return {
+            paintings: products.filter((p) => p.category === "painting").map(mapToProduct),
+            crochetItems: products.filter((p) => p.category === "crochet").map(mapToProduct),
+            bestSellers: products.filter((p) => p.is_best_seller).map(mapToProduct),
+            raw: products,
+          };
+        }
+      } catch (e) {
+        console.warn("Failed to fetch products from DB, using static data", e);
       }
 
+      // Fallback to static data
       return {
-        paintings: products.filter((p) => p.category === "painting").map(mapToProduct),
-        crochetItems: products.filter((p) => p.category === "crochet").map(mapToProduct),
-        bestSellers: products.filter((p) => p.is_best_seller).map(mapToProduct),
-        raw: products,
+        paintings,
+        crochetItems,
+        bestSellers,
+        raw: [] as DbProduct[],
       };
     },
   });
