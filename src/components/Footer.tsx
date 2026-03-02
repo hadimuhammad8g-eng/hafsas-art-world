@@ -1,12 +1,13 @@
 import { Heart } from "lucide-react";
 import { Link } from "react-router-dom";
+import logo from "@/assets/logo.png";
 
 const Footer = () => (
   <footer className="py-10 sm:py-12 px-4 sm:px-6 border-t border-border bg-footer-bg">
     <div className="container mx-auto max-w-6xl">
       <div className="flex flex-col md:flex-row items-center justify-between gap-6">
         <div className="flex items-center gap-3 text-center md:text-left">
-          <img alt="Logo" className="w-10 h-10 rounded-full object-cover" src="/lovable-uploads/42c89b50-1c40-4235-bbbb-adc302d9e160.jpg" />
+          <img alt="Logo" className="w-10 h-10 rounded-full object-cover" src={logo} />
           <div>
             <h3 className="font-heading text-xl text-primary-foreground">Hafsa's Art World</h3>
             <p className="font-body text-xs sm:text-sm text-primary-foreground/60">Handcrafted art, made with love</p>
