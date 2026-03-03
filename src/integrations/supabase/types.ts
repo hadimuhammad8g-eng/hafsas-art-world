@@ -24,6 +24,7 @@ export type Database = {
           is_best_seller: boolean
           name: string
           price: number
+          sale_price: number | null
           sort_order: number
           updated_at: string
         }
@@ -36,6 +37,7 @@ export type Database = {
           is_best_seller?: boolean
           name: string
           price: number
+          sale_price?: number | null
           sort_order?: number
           updated_at?: string
         }
@@ -48,6 +50,7 @@ export type Database = {
           is_best_seller?: boolean
           name?: string
           price?: number
+          sale_price?: number | null
           sort_order?: number
           updated_at?: string
         }
