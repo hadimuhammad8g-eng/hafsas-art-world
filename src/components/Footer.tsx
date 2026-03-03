@@ -2,8 +2,8 @@ import { Heart, MessageCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import logo from "@/assets/logo.png";
 
-const WHATSAPP_NUMBER = "923000000000"; // Replace with actual number
-const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=Hi!%20I'm%20interested%20in%20your%20art%20products.`;
+const WHATSAPP_URL = "https://wa.me/923432080769?text=Hi!%20I'm%20interested%20in%20your%20art%20products.";
+const INSTAGRAM_URL = "https://www.instagram.com/hafsaarif13?igsh=MXE3YjNxdjJyMGo3cA%3D%3D&utm_source=qr";
 
 const Footer = () => (
   <footer className="py-10 sm:py-12 px-4 sm:px-6 border-t border-border bg-footer-bg">
@@ -17,11 +17,15 @@ const Footer = () => (
           </div>
         </div>
         <div className="flex items-center gap-4 sm:gap-6">
-          {["Instagram", "Pinterest", "Email"].map((label) => (
-            <a key={label} href="#" className="font-body text-xs sm:text-sm transition-colors text-primary-foreground/70 hover:text-primary-foreground">
-              {label}
-            </a>
-          ))}
+          <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className="font-body text-xs sm:text-sm transition-colors text-primary-foreground/70 hover:text-primary-foreground">
+            Instagram
+          </a>
+          <a href="#" className="font-body text-xs sm:text-sm transition-colors text-primary-foreground/70 hover:text-primary-foreground">
+            Pinterest
+          </a>
+          <a href="mailto:hadimuhammad8g@gmail.com" className="font-body text-xs sm:text-sm transition-colors text-primary-foreground/70 hover:text-primary-foreground">
+            Email
+          </a>
           <a
             href={WHATSAPP_URL}
             target="_blank"

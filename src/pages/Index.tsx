@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import ProductSection from "@/components/ProductSection";
 import BestSellingSection from "@/components/BestSellingSection";
+import SpecialSaleSection from "@/components/SpecialSaleSection";
 import CustomOrderSection from "@/components/CustomOrderSection";
 import CartDrawer, { CartItem } from "@/components/CartDrawer";
 import FloatingFlowers from "@/components/FloatingFlowers";
@@ -21,6 +22,7 @@ const Index = () => {
   const paintings = productData?.paintings ?? [];
   const crochetItems = productData?.crochetItems ?? [];
   const bestSellers = productData?.bestSellers ?? [];
+  const saleItems = productData?.saleItems ?? [];
 
   const addToCart = useCallback((product: Product) => {
     setCartItems((prev) => {
@@ -63,6 +65,8 @@ const Index = () => {
       <HeroSection />
 
       <BestSellingSection products={bestSellers} onAddToCart={addToCart} />
+
+      <SpecialSaleSection products={saleItems} onAddToCart={addToCart} />
 
       <ProductSection
         id="paintings"

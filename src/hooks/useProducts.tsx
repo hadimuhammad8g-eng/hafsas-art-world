@@ -12,6 +12,7 @@ export interface DbProduct {
   description: string;
   is_best_seller: boolean;
   sort_order: number;
+  sale_price?: number | null;
 }
 
 const mapToProduct = (p: DbProduct): Product => ({
@@ -21,6 +22,15 @@ const mapToProduct = (p: DbProduct): Product => ({
   image: p.image_url,
   category: p.category,
   description: p.description,
+});
+
+export interface SaleProduct extends Product {
+  salePrice?: number;
+}
+
+const mapToSaleProduct = (p: DbProduct): SaleProduct => ({
+  ...mapToProduct(p),
+  salePrice: p.sale_price ?? undefined,
 });
 
 export const useProducts = () => {
@@ -37,25 +47,29 @@ export const useProducts = () => {
 
         const products = (data as DbProduct[]) || [];
 
-        if (products.length > 0) {
-          return {
-            paintings: products.filter((p) => p.category === "painting").map(mapToProduct),
-            crochetItems: products.filter((p) => p.category === "crochet").map(mapToProduct),
-            bestSellers: products.filter((p) => p.is_best_seller).map(mapToProduct),
-            raw: products,
-          };
-        }
+        // Merge: DB products + static fallbacks (static only if no DB products in that category)
+        const dbPaintings = products.filter((p) => p.category === "painting").map(mapToProduct);
+        const dbCrochet = products.filter((p) => p.category === "crochet").map(mapToProduct);
+        const dbBestSellers = products.filter((p) => p.is_best_seller).map(mapToProduct);
+        const dbSaleItems = products.filter((p) => p.sale_price != null && p.sale_price > 0).map(mapToSaleProduct);
+
+        return {
+          paintings: dbPaintings.length > 0 ? dbPaintings : paintings,
+          crochetItems: dbCrochet.length > 0 ? dbCrochet : crochetItems,
+          bestSellers: dbBestSellers.length > 0 ? dbBestSellers : bestSellers,
+          saleItems: dbSaleItems,
+          raw: products,
+        };
       } catch (e) {
         console.warn("Failed to fetch products from DB, using static data", e);
+        return {
+          paintings,
+          crochetItems,
+          bestSellers,
+          saleItems: [] as SaleProduct[],
+          raw: [] as DbProduct[],
+        };
       }
-
-      // Fallback to static data
-      return {
-        paintings,
-        crochetItems,
-        bestSellers,
-        raw: [] as DbProduct[],
-      };
     },
   });
 };

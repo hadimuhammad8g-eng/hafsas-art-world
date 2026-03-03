@@ -15,6 +15,7 @@ interface ProductForm {
   is_best_seller: boolean;
   sort_order: string;
   image_url: string;
+  sale_price: string;
 }
 
 const emptyForm: ProductForm = {
@@ -25,6 +26,7 @@ const emptyForm: ProductForm = {
   is_best_seller: false,
   sort_order: "0",
   image_url: "",
+  sale_price: "",
 };
 
 const AdminDashboard = () => {
@@ -79,6 +81,7 @@ const AdminDashboard = () => {
       is_best_seller: p.is_best_seller,
       sort_order: String(p.sort_order),
       image_url: p.image_url,
+      sale_price: p.sale_price ? String(p.sale_price) : "",
     });
     setEditing(p.id);
     setShowForm(true);
@@ -103,6 +106,7 @@ const AdminDashboard = () => {
       is_best_seller: form.is_best_seller,
       sort_order: parseInt(form.sort_order) || 0,
       image_url: form.image_url,
+      sale_price: form.sale_price ? parseFloat(form.sale_price) : null,
     };
 
     try {
@@ -272,6 +276,18 @@ const AdminDashboard = () => {
                       onChange={(e) => setForm((f) => ({ ...f, description: e.target.value }))}
                       className="w-full px-3 py-2.5 bg-background border border-border rounded-lg font-body text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 resize-none"
                       placeholder="Brief description..."
+                    />
+                  </div>
+
+                  <div>
+                    <label className="font-body text-xs text-muted-foreground block mb-1.5">Sale Price (PKR) — leave empty if not on sale</label>
+                    <input
+                      type="number"
+                      step="0.01"
+                      value={form.sale_price}
+                      onChange={(e) => setForm((f) => ({ ...f, sale_price: e.target.value }))}
+                      className="w-full px-3 py-2.5 bg-background border border-border rounded-lg font-body text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
+                      placeholder="0.00"
                     />
                   </div>
 
