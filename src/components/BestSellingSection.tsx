@@ -4,9 +4,10 @@ import ProductCard, { Product } from "./ProductCard";
 interface BestSellingSectionProps {
   products: Product[];
   onAddToCart: (product: Product) => void;
+  onProductClick?: (product: Product) => void;
 }
 
-const BestSellingSection = ({ products, onAddToCart }: BestSellingSectionProps) => {
+const BestSellingSection = ({ products, onAddToCart, onProductClick }: BestSellingSectionProps) => {
   return (
     <section className="py-16 sm:py-20 md:py-24 px-4 sm:px-6">
       <div className="container mx-auto max-w-6xl bg-container-bg/40 rounded-xl p-6 sm:p-8 border border-border shadow-warm">
@@ -31,7 +32,7 @@ const BestSellingSection = ({ products, onAddToCart }: BestSellingSectionProps) 
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
           {products.map((product, i) => (
-            <ProductCard key={product.id} product={product} onAddToCart={onAddToCart} index={i} />
+            <ProductCard key={product.id} product={product} onAddToCart={onAddToCart} onProductClick={onProductClick} index={i} />
           ))}
         </div>
       </div>
