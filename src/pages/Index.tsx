@@ -9,6 +9,7 @@ import CustomOrderSection from "@/components/CustomOrderSection";
 import CartDrawer, { CartItem } from "@/components/CartDrawer";
 import FloatingFlowers from "@/components/FloatingFlowers";
 import Footer from "@/components/Footer";
+import ProductDetailDialog from "@/components/ProductDetailDialog";
 import { Product } from "@/components/ProductCard";
 import { useProducts } from "@/hooks/useProducts";
 import { toast } from "sonner";
@@ -16,6 +17,7 @@ import { toast } from "sonner";
 const Index = () => {
   const [cartOpen, setCartOpen] = useState(false);
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const navigate = useNavigate();
   const { data: productData } = useProducts();
 
@@ -58,13 +60,17 @@ const Index = () => {
     navigate("/checkout", { state: { items: cartItems } });
   }, [cartItems, navigate]);
 
+  const handleProductClick = useCallback((product: Product) => {
+    setSelectedProduct(product);
+  }, []);
+
   return (
     <div className="min-h-screen bg-page-pattern">
       <FloatingFlowers />
       <Navbar cartCount={cartCount} onCartClick={() => setCartOpen(true)} />
       <HeroSection />
 
-      <BestSellingSection products={bestSellers} onAddToCart={addToCart} />
+      <BestSellingSection products={bestSellers} onAddToCart={addToCart} onProductClick={handleProductClick} />
 
       <SpecialSaleSection products={saleItems} onAddToCart={addToCart} />
 
@@ -74,6 +80,7 @@ const Index = () => {
         subtitle="Original artworks that bring warmth and beauty to any space"
         products={paintings}
         onAddToCart={addToCart}
+        onProductClick={handleProductClick}
       />
 
       <ProductSection
@@ -82,6 +89,7 @@ const Index = () => {
         subtitle="Lovingly handcrafted pieces for cozy living"
         products={crochetItems}
         onAddToCart={addToCart}
+        onProductClick={handleProductClick}
       />
 
       <CustomOrderSection />
@@ -94,6 +102,13 @@ const Index = () => {
         onUpdateQuantity={updateQuantity}
         onRemove={removeItem}
         onCheckout={handleCheckout}
+      />
+
+      <ProductDetailDialog
+        product={selectedProduct}
+        open={!!selectedProduct}
+        onClose={() => setSelectedProduct(null)}
+        onAddToCart={addToCart}
       />
     </div>
   );

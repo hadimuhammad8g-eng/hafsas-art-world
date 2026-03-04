@@ -14,10 +14,11 @@ export interface Product {
 interface ProductCardProps {
   product: Product;
   onAddToCart: (product: Product) => void;
+  onProductClick?: (product: Product) => void;
   index: number;
 }
 
-const ProductCard = ({ product, onAddToCart, index }: ProductCardProps) => {
+const ProductCard = ({ product, onAddToCart, onProductClick, index }: ProductCardProps) => {
   const [hovered, setHovered] = useState(false);
 
   return (
@@ -26,9 +27,10 @@ const ProductCard = ({ product, onAddToCart, index }: ProductCardProps) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-30px" }}
       transition={{ delay: index * 0.05, duration: 0.4 }}
-      className="group"
+      className="group cursor-pointer"
       onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}>
+      onMouseLeave={() => setHovered(false)}
+      onClick={() => onProductClick?.(product)}>
 
       <div className="relative overflow-hidden rounded-lg bg-card shadow-warm hover:shadow-warm-lg transition-shadow duration-400">
         <div className="aspect-square overflow-hidden">
@@ -37,7 +39,6 @@ const ProductCard = ({ product, onAddToCart, index }: ProductCardProps) => {
             alt={product.name}
             loading="lazy"
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
-
         </div>
 
         <motion.div
@@ -46,10 +47,9 @@ const ProductCard = ({ product, onAddToCart, index }: ProductCardProps) => {
           className="absolute inset-0 bg-foreground/10 items-center justify-center flex flex-row">
 
           <button
-            onClick={() => onAddToCart(product)}
+            onClick={(e) => { e.stopPropagation(); onAddToCart(product); }}
             className="p-2.5 bg-card rounded-full shadow-warm-lg hover:scale-110 transition-transform"
             aria-label="Add to cart">
-
             <ShoppingBag className="w-4 h-4 text-foreground" />
           </button>
         </motion.div>
@@ -61,7 +61,6 @@ const ProductCard = ({ product, onAddToCart, index }: ProductCardProps) => {
         <p className="font-heading text-sm sm:text-base text-primary mt-1">PKR {product.price.toLocaleString()}</p>
       </div>
     </motion.div>);
-
 };
 
 export default ProductCard;

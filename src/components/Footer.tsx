@@ -23,7 +23,7 @@ const Footer = () => (
           <a href="#" className="font-body text-xs sm:text-sm transition-colors text-primary-foreground/70 hover:text-primary-foreground">
             Pinterest
           </a>
-          <a href="mailto:hadimuhammad8g@gmail.com" className="font-body text-xs sm:text-sm transition-colors text-primary-foreground/70 hover:text-primary-foreground">
+          <a href="mailto:arifhafsa446@gmail.com" className="font-body text-xs sm:text-sm transition-colors text-primary-foreground/70 hover:text-primary-foreground">
             Email
           </a>
           <a
