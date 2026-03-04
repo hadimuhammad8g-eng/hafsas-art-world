@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { motion } from "framer-motion";
-import { Lock } from "lucide-react";
+import { Lock, UserPlus } from "lucide-react";
 import logo from "@/assets/logo.png";
 
 const AdminLogin = () => {
@@ -10,7 +10,8 @@ const AdminLogin = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const { signIn, user } = useAuth();
+  const [isSignUp, setIsSignUp] = useState(false);
+  const { signIn, signUp, user } = useAuth();
   const navigate = useNavigate();
 
   if (user) {
@@ -22,12 +23,25 @@ const AdminLogin = () => {
     e.preventDefault();
     setError("");
     setLoading(true);
-    const { error: err } = await signIn(email, password);
-    setLoading(false);
-    if (err) {
-      setError(err);
+    if (isSignUp) {
+      const { error: err } = await signUp(email, password);
+      setLoading(false);
+      if (err) {
+        setError(err);
+      } else {
+        setError("");
+        setIsSignUp(false);
+        // Show success message
+        setError("Account created! Please check your email to verify, then sign in.");
+      }
     } else {
-      navigate("/admin");
+      const { error: err } = await signIn(email, password);
+      setLoading(false);
+      if (err) {
+        setError(err);
+      } else {
+        navigate("/admin");
+      }
     }
   };
 
@@ -40,13 +54,15 @@ const AdminLogin = () => {
       >
         <div className="text-center mb-8">
           <img src={logo} alt="Logo" className="w-16 h-16 mx-auto rounded-full object-cover mb-4 border-2 border-secondary" />
-          <h1 className="font-heading text-2xl text-foreground italic">Admin Login</h1>
-          <p className="font-body text-sm text-muted-foreground mt-1">Sign in to manage your products</p>
+          <h1 className="font-heading text-2xl text-foreground italic">{isSignUp ? "Create Admin Account" : "Admin Login"}</h1>
+          <p className="font-body text-sm text-muted-foreground mt-1">
+            {isSignUp ? "Sign up to manage your products" : "Sign in to manage your products"}
+          </p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           {error && (
-            <div className="p-3 bg-destructive/10 border border-destructive/20 rounded-lg text-sm text-destructive font-body">
+            <div className={`p-3 border rounded-lg text-sm font-body ${error.includes("created") ? "bg-green-50 border-green-200 text-green-700" : "bg-destructive/10 border-destructive/20 text-destructive"}`}>
               {error}
             </div>
           )}
@@ -58,7 +74,7 @@ const AdminLogin = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="w-full px-4 py-3 bg-background border border-border rounded-lg font-body text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all"
-              placeholder="admin@example.com"
+              placeholder="arifhafsa466@gmail.com"
             />
           </div>
           <div>
@@ -78,13 +94,21 @@ const AdminLogin = () => {
             disabled={loading}
             className="w-full py-3 bg-primary text-primary-foreground font-body text-sm uppercase tracking-widest rounded-lg hover:opacity-90 transition-all flex items-center justify-center gap-2 disabled:opacity-60 shadow-warm"
           >
-            <Lock className="w-4 h-4" /> {loading ? "Signing in..." : "Sign In"}
+            {isSignUp ? <UserPlus className="w-4 h-4" /> : <Lock className="w-4 h-4" />}
+            {loading ? (isSignUp ? "Creating..." : "Signing in...") : (isSignUp ? "Create Account" : "Sign In")}
           </button>
         </form>
 
         <button
+          onClick={() => { setIsSignUp(!isSignUp); setError(""); }}
+          className="w-full mt-3 font-body text-xs text-primary hover:text-primary/80 transition-colors text-center"
+        >
+          {isSignUp ? "Already have an account? Sign In" : "Need an account? Sign Up"}
+        </button>
+
+        <button
           onClick={() => navigate("/")}
-          className="w-full mt-4 font-body text-xs text-muted-foreground hover:text-foreground transition-colors text-center"
+          className="w-full mt-2 font-body text-xs text-muted-foreground hover:text-foreground transition-colors text-center"
         >
           ← Back to Shop
         </button>

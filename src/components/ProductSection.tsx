@@ -7,10 +7,9 @@ interface ProductSectionProps {
   subtitle: string;
   products: Product[];
   onAddToCart: (product: Product) => void;
-  onProductClick?: (product: Product) => void;
 }
 
-const ProductSection = ({ id, title, subtitle, products, onAddToCart, onProductClick }: ProductSectionProps) => {
+const ProductSection = ({ id, title, subtitle, products, onAddToCart }: ProductSectionProps) => {
   return (
     <section id={id} className="py-16 sm:py-20 md:py-24 px-4 sm:px-6">
       <div className="container mx-auto max-w-6xl bg-container-bg/40 rounded-xl p-6 sm:p-8 border border-border shadow-warm">
@@ -33,7 +32,7 @@ const ProductSection = ({ id, title, subtitle, products, onAddToCart, onProductC
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-5">
           {products.map((product, i) => (
-            <ProductCard key={product.id} product={product} onAddToCart={onAddToCart} onProductClick={onProductClick} index={i} />
+            <ProductCard key={product.id} product={product} onAddToCart={onAddToCart} index={i} />
           ))}
         </div>
       </div>
