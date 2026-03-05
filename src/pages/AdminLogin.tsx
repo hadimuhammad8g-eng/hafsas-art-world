@@ -11,6 +11,18 @@ const AdminLogin = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [isSignUp, setIsSignUp] = useState(false);
+  const [rememberMe, setRememberMe] = useState(() => {
+    const saved = localStorage.getItem("admin_email");
+    if (saved) return true;
+    return false;
+  });
+
+  useState(() => {
+    const savedEmail = localStorage.getItem("admin_email");
+    const savedPass = localStorage.getItem("admin_pass");
+    if (savedEmail) setEmail(savedEmail);
+    if (savedPass) setPassword(savedPass);
+  });
   const { signIn, signUp, user } = useAuth();
   const navigate = useNavigate();
 
