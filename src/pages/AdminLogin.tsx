@@ -6,8 +6,8 @@ import { Lock, UserPlus } from "lucide-react";
 import logo from "@/assets/logo.png";
 
 const AdminLogin = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState(() => localStorage.getItem("admin_email") || "");
+  const [password, setPassword] = useState(() => localStorage.getItem("admin_pass") || "");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [isSignUp, setIsSignUp] = useState(false);
