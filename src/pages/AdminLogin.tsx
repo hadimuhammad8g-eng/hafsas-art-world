@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { motion } from "framer-motion";
-import { Lock, UserPlus } from "lucide-react";
+import { Lock, UserPlus, Check } from "lucide-react";
 import logo from "@/assets/logo.png";
 
 const AdminLogin = () => {
@@ -52,6 +52,13 @@ const AdminLogin = () => {
       if (err) {
         setError(err);
       } else {
+        if (rememberMe) {
+          localStorage.setItem("admin_email", email);
+          localStorage.setItem("admin_pass", password);
+        } else {
+          localStorage.removeItem("admin_email");
+          localStorage.removeItem("admin_pass");
+        }
         navigate("/admin");
       }
     }
@@ -101,6 +108,17 @@ const AdminLogin = () => {
               placeholder="••••••••"
             />
           </div>
+          {!isSignUp && (
+            <label className="flex items-center gap-2 cursor-pointer select-none">
+              <div
+                onClick={() => setRememberMe(!rememberMe)}
+                className={`w-4 h-4 rounded border flex items-center justify-center transition-colors ${rememberMe ? 'bg-primary border-primary' : 'border-border bg-background'}`}
+              >
+                {rememberMe && <Check className="w-3 h-3 text-primary-foreground" />}
+              </div>
+              <span className="font-body text-xs text-muted-foreground">Remember me</span>
+            </label>
+          )}
           <button
             type="submit"
             disabled={loading}
