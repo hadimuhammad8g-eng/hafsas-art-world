@@ -35,7 +35,7 @@ const ProductCard = ({ product, onAddToCart, index }: ProductCardProps) => {
         onMouseLeave={() => setHovered(false)}
         onClick={() => setExpanded((v) => !v)}
       >
-        <div className="aspect-[4/5] overflow-hidden">
+        <div className="aspect-[3/4] sm:aspect-[4/5] overflow-hidden">
           <img
             src={product.image}
             alt={product.name}

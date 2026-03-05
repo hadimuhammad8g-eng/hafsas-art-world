@@ -33,7 +33,7 @@ const SaleCard = ({ product, onAddToCart, index }: { product: SaleProduct; onAdd
             {discount}% OFF
           </div>
         )}
-        <div className="aspect-square overflow-hidden">
+        <div className="aspect-[3/4] sm:aspect-[4/5] overflow-hidden">
           <img
             src={product.image}
             alt={product.name}
@@ -94,7 +94,7 @@ const SpecialSaleSection = ({ products, onAddToCart }: SpecialSaleSectionProps) 
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 md:gap-5">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 sm:gap-4 md:gap-5">
           {products.map((product, i) => (
             <SaleCard key={product.id} product={product} onAddToCart={onAddToCart} index={i} />
           ))}

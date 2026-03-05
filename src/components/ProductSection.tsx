@@ -30,7 +30,7 @@ const ProductSection = ({ id, title, subtitle, products, onAddToCart }: ProductS
           <p className="font-body text-sm sm:text-base max-w-lg mx-auto text-muted-foreground">{subtitle}</p>
         </motion.div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 md:gap-5">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 sm:gap-4 md:gap-5">
           {products.map((product, i) => (
             <ProductCard key={product.id} product={product} onAddToCart={onAddToCart} index={i} />
           ))}
