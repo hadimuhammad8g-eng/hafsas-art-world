@@ -17,12 +17,6 @@ const AdminLogin = () => {
     return false;
   });
 
-  useState(() => {
-    const savedEmail = localStorage.getItem("admin_email");
-    const savedPass = localStorage.getItem("admin_pass");
-    if (savedEmail) setEmail(savedEmail);
-    if (savedPass) setPassword(savedPass);
-  });
   const { signIn, signUp, user } = useAuth();
   const navigate = useNavigate();
 
