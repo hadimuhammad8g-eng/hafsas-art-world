@@ -30,7 +30,7 @@ const emptyForm: ProductForm = {
 };
 
 const AdminDashboard = () => {
-  const { user, loading: authLoading, signOut } = useAuth();
+  const { user, isAdmin, loading: authLoading, signOut } = useAuth();
   const navigate = useNavigate();
   const { data, isLoading } = useProducts();
   const addProduct = useAddProduct();
@@ -51,7 +51,7 @@ const AdminDashboard = () => {
     );
   }
 
-  if (!user) {
+  if (!user || !isAdmin) {
     navigate("/admin/login");
     return null;
   }

@@ -12,10 +12,10 @@ const AdminLogin = () => {
   const [loading, setLoading] = useState(false);
   const [rememberMe, setRememberMe] = useState(() => !!localStorage.getItem("admin_email"));
 
-  const { signIn, user } = useAuth();
+  const { signIn, user, isAdmin, loading: authLoading, signOut } = useAuth();
   const navigate = useNavigate();
 
-  if (user) {
+  if (!authLoading && user && isAdmin) {
     navigate("/admin");
     return null;
   }
@@ -25,19 +25,35 @@ const AdminLogin = () => {
     setError("");
     setLoading(true);
     const { error: err } = await signIn(email, password);
-    setLoading(false);
     if (err) {
+      setLoading(false);
       setError(err);
-    } else {
-      if (rememberMe) {
-        localStorage.setItem("admin_email", email);
-        localStorage.setItem("admin_pass", password);
-      } else {
-        localStorage.removeItem("admin_email");
-        localStorage.removeItem("admin_pass");
-      }
-      navigate("/admin");
+      return;
     }
+    // Wait briefly for auth state to update, then check admin role
+    const { data: roleData } = await (await import("@/integrations/supabase/client")).supabase
+      .from("user_roles")
+      .select("role")
+      .eq("role", "admin")
+      .maybeSingle();
+    
+    if (!roleData) {
+      // Not an admin — sign them out immediately
+      await signOut();
+      setLoading(false);
+      setError("Access denied. You are not authorized to access the admin dashboard.");
+      return;
+    }
+
+    setLoading(false);
+    if (rememberMe) {
+      localStorage.setItem("admin_email", email);
+      localStorage.setItem("admin_pass", password);
+    } else {
+      localStorage.removeItem("admin_email");
+      localStorage.removeItem("admin_pass");
+    }
+    navigate("/admin");
   };
 
   return (
