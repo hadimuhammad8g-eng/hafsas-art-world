@@ -10,7 +10,7 @@ const AdminLogin = () => {
   const [password, setPassword] = useState(() => localStorage.getItem("admin_pass") || "");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const [isSignUp, setIsSignUp] = useState(false);
+  
   const [rememberMe, setRememberMe] = useState(() => {
     const saved = localStorage.getItem("admin_email");
     if (saved) return true;
