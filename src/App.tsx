@@ -9,6 +9,7 @@ import CheckoutPage from "./pages/CheckoutPage";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 import NotFound from "./pages/NotFound";
+import HafsaReceptionist from "@/components/HafsaReceptionist";
 
 const queryClient = new QueryClient();
 
@@ -29,6 +30,7 @@ const App = () => (
           </Routes>
         </BrowserRouter>
       </TooltipProvider>
+      <HafsaReceptionist />
     </AuthProvider>
   </QueryClientProvider>
 );
