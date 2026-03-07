@@ -30,21 +30,7 @@ const AdminLogin = () => {
       setError(err);
       return;
     }
-    // Wait briefly for auth state to update, then check admin role
-    const { data: roleData } = await (await import("@/integrations/supabase/client")).supabase
-      .from("user_roles")
-      .select("role")
-      .eq("role", "admin")
-      .maybeSingle();
     
-    if (!roleData) {
-      // Not an admin — sign them out immediately
-      await signOut();
-      setLoading(false);
-      setError("Access denied. You are not authorized to access the admin dashboard.");
-      return;
-    }
-
     setLoading(false);
     if (rememberMe) {
       localStorage.setItem("admin_email", email);
