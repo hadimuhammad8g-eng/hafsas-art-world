@@ -32,7 +32,7 @@ const emptyForm: ProductForm = {
 const AdminDashboard = () => {
   const { user, isAdmin, loading: authLoading, signOut } = useAuth();
   const navigate = useNavigate();
-  const { data, isLoading } = useProducts();
+  const { data, isLoading, error } = useProducts();
   const addProduct = useAddProduct();
   const updateProduct = useUpdateProduct();
   const deleteProduct = useDeleteProduct();
@@ -43,17 +43,24 @@ const AdminDashboard = () => {
   const [showForm, setShowForm] = useState(false);
   const [uploading, setUploading] = useState(false);
 
+  // Always render something — never return null early
   if (authLoading) {
     return (
-      <div className="min-h-screen bg-page-pattern flex items-center justify-center">
-        <p className="font-body text-muted-foreground">Loading...</p>
+      <div style={{ minHeight: "100vh", background: "#fdf8f2", display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <p style={{ fontFamily: "sans-serif", color: "#7a5c40" }}>Loading...</p>
       </div>
     );
   }
 
   if (!user || !isAdmin) {
-    navigate("/admin/login");
-    return null;
+    return (
+      <div style={{ minHeight: "100vh", background: "#fdf8f2", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: "16px" }}>
+        <p style={{ fontFamily: "sans-serif", color: "#7a5c40" }}>Not authorized. Redirecting...</p>
+        <button onClick={() => navigate("/admin/login")} style={{ padding: "8px 20px", background: "#7a5c40", color: "white", border: "none", borderRadius: "8px", cursor: "pointer" }}>
+          Go to Login
+        </button>
+      </div>
+    );
   }
 
   const products = data?.raw || [];
@@ -108,7 +115,6 @@ const AdminDashboard = () => {
       image_url: form.image_url,
       sale_price: form.sale_price ? parseFloat(form.sale_price) : null,
     };
-
     try {
       if (editing) {
         await updateProduct.mutateAsync({ id: editing, ...payload });
@@ -143,7 +149,8 @@ const AdminDashboard = () => {
             <img src={logo} alt="Logo" className="w-8 h-8 rounded-full object-cover" />
             <h1 className="font-heading text-lg text-foreground">Admin Dashboard</h1>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
+            <span className="font-body text-xs text-muted-foreground hidden sm:block">{user.email}</span>
             <button onClick={() => navigate("/")} className="p-2 hover:bg-secondary rounded-lg transition-colors">
               <ArrowLeft className="w-4 h-4 text-muted-foreground" />
             </button>
@@ -155,9 +162,10 @@ const AdminDashboard = () => {
       </header>
 
       <div className="container mx-auto px-4 py-8 max-w-5xl">
-        {/* Actions */}
         <div className="flex items-center justify-between mb-6">
-          <h2 className="font-heading text-2xl text-foreground italic">Products ({products.length})</h2>
+          <h2 className="font-heading text-2xl text-foreground italic">
+            Products ({products.length})
+          </h2>
           <button
             onClick={openNew}
             className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground font-body text-sm rounded-lg hover:opacity-90 transition-all shadow-gold"
@@ -165,6 +173,15 @@ const AdminDashboard = () => {
             <Plus className="w-4 h-4" /> Add Product
           </button>
         </div>
+
+        {/* Error state */}
+        {error && (
+          <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
+            <p className="font-body text-sm text-red-600">
+              Could not load products from database. You can still add new products below.
+            </p>
+          </div>
+        )}
 
         {/* Product Form Modal */}
         <AnimatePresence>
@@ -184,12 +201,15 @@ const AdminDashboard = () => {
                 className="bg-card rounded-xl p-6 w-full max-w-lg shadow-warm-lg max-h-[90vh] overflow-y-auto"
               >
                 <div className="flex items-center justify-between mb-6">
-                  <h3 className="font-heading text-xl text-foreground">{editing ? "Edit Product" : "New Product"}</h3>
-                  <button onClick={() => setShowForm(false)}><X className="w-5 h-5 text-muted-foreground" /></button>
+                  <h3 className="font-heading text-xl text-foreground">
+                    {editing ? "Edit Product" : "New Product"}
+                  </h3>
+                  <button onClick={() => setShowForm(false)}>
+                    <X className="w-5 h-5 text-muted-foreground" />
+                  </button>
                 </div>
 
                 <div className="space-y-4">
-                  {/* Image Upload */}
                   <div>
                     <label className="font-body text-xs text-muted-foreground block mb-1.5">Image</label>
                     {form.image_url ? (
@@ -235,37 +255,24 @@ const AdminDashboard = () => {
                       <label className="font-body text-xs text-muted-foreground block mb-1.5">Price (PKR)</label>
                       <input
                         type="number"
-                        step="0.01"
                         value={form.price}
                         onChange={(e) => setForm((f) => ({ ...f, price: e.target.value }))}
-                        className="w-full px-3 py-2.5 bg-background border border-border rounded-lg font-body text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
-                        placeholder="0.00"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <label className="font-body text-xs text-muted-foreground block mb-1.5">Category</label>
-                      <select
-                        value={form.category}
-                        onChange={(e) => setForm((f) => ({ ...f, category: e.target.value }))}
-                        className="w-full px-3 py-2.5 bg-background border border-border rounded-lg font-body text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
-                      >
-                        <option value="painting">Painting</option>
-                        <option value="crochet">Crochet</option>
-                      </select>
-                    </div>
-                    <div>
-                      <label className="font-body text-xs text-muted-foreground block mb-1.5">Sort Order</label>
-                      <input
-                        type="number"
-                        value={form.sort_order}
-                        onChange={(e) => setForm((f) => ({ ...f, sort_order: e.target.value }))}
                         className="w-full px-3 py-2.5 bg-background border border-border rounded-lg font-body text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
                         placeholder="0"
                       />
                     </div>
+                  </div>
+
+                  <div>
+                    <label className="font-body text-xs text-muted-foreground block mb-1.5">Category</label>
+                    <select
+                      value={form.category}
+                      onChange={(e) => setForm((f) => ({ ...f, category: e.target.value }))}
+                      className="w-full px-3 py-2.5 bg-background border border-border rounded-lg font-body text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
+                    >
+                      <option value="painting">Painting</option>
+                      <option value="crochet">Crochet</option>
+                    </select>
                   </div>
 
                   <div>
@@ -280,23 +287,21 @@ const AdminDashboard = () => {
                   </div>
 
                   <div>
-                    <label className="font-body text-xs text-muted-foreground block mb-1.5">Sale Price (PKR) — leave empty if not on sale</label>
+                    <label className="font-body text-xs text-muted-foreground block mb-1.5">Sale Price (PKR) — optional</label>
                     <input
                       type="number"
-                      step="0.01"
                       value={form.sale_price}
                       onChange={(e) => setForm((f) => ({ ...f, sale_price: e.target.value }))}
                       className="w-full px-3 py-2.5 bg-background border border-border rounded-lg font-body text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
-                      placeholder="0.00"
+                      placeholder="0"
                     />
                   </div>
 
-                  <label className="flex items-center gap-2">
+                  <label className="flex items-center gap-2 cursor-pointer">
                     <input
                       type="checkbox"
                       checked={form.is_best_seller}
                       onChange={(e) => setForm((f) => ({ ...f, is_best_seller: e.target.checked }))}
-                      className="rounded border-border"
                     />
                     <span className="font-body text-sm text-foreground">Best Seller</span>
                   </label>
@@ -304,9 +309,10 @@ const AdminDashboard = () => {
                   <button
                     onClick={handleSave}
                     disabled={addProduct.isPending || updateProduct.isPending}
-                    className="w-full py-3 bg-primary text-primary-foreground font-body text-sm uppercase tracking-widest rounded-lg hover:opacity-90 transition-all flex items-center justify-center gap-2 disabled:opacity-60 shadow-gold"
+                    className="w-full py-3 bg-primary text-primary-foreground font-body text-sm uppercase tracking-widest rounded-lg hover:opacity-90 transition-all flex items-center justify-center gap-2 disabled:opacity-60"
                   >
-                    <Save className="w-4 h-4" /> {editing ? "Update" : "Create"} Product
+                    <Save className="w-4 h-4" />
+                    {editing ? "Update Product" : "Create Product"}
                   </button>
                 </div>
               </motion.div>
@@ -316,29 +322,31 @@ const AdminDashboard = () => {
 
         {/* Products List */}
         {isLoading ? (
-          <p className="font-body text-muted-foreground text-center py-12">Loading products...</p>
+          <div className="text-center py-16">
+            <p className="font-body text-muted-foreground">Loading products...</p>
+          </div>
         ) : products.length === 0 ? (
-          <div className="text-center py-16 bg-card rounded-xl shadow-warm">
+          <div className="text-center py-16 bg-card rounded-xl shadow-warm border border-border">
             <ImageIcon className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
             <p className="font-heading text-lg text-foreground mb-2">No products yet</p>
-            <p className="font-body text-sm text-muted-foreground mb-4">
+            <p className="font-body text-sm text-muted-foreground mb-6">
               Add your first product to start managing your store.
             </p>
             <button
               onClick={openNew}
-              className="px-6 py-2 bg-primary text-primary-foreground font-body text-sm rounded-lg hover:opacity-90 shadow-gold"
+              className="px-6 py-2 bg-primary text-primary-foreground font-body text-sm rounded-lg hover:opacity-90"
             >
               Add First Product
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {products.map((p) => (
               <motion.div
                 key={p.id}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="bg-card rounded-lg overflow-hidden shadow-warm hover:shadow-warm-lg transition-shadow"
+                className="bg-card rounded-lg overflow-hidden shadow-warm hover:shadow-warm-lg transition-shadow border border-border"
               >
                 <div className="aspect-square bg-secondary">
                   {p.image_url ? (
@@ -350,19 +358,19 @@ const AdminDashboard = () => {
                   )}
                 </div>
                 <div className="p-4">
-                  <div className="flex items-start justify-between gap-2">
+                  <div className="flex items-start justify-between gap-2 mb-2">
                     <div>
                       <h3 className="font-heading text-sm text-foreground">{p.name}</h3>
                       <p className="font-body text-xs text-muted-foreground capitalize">{p.category}</p>
                     </div>
-                    <p className="font-heading text-sm text-primary">PKR {p.price.toLocaleString()}</p>
+                    <p className="font-heading text-sm text-primary whitespace-nowrap">PKR {p.price.toLocaleString()}</p>
                   </div>
                   {p.is_best_seller && (
-                    <span className="inline-block mt-2 px-2 py-0.5 bg-accent/10 text-accent text-xs font-body rounded">
+                    <span className="inline-block mb-2 px-2 py-0.5 bg-accent/10 text-accent text-xs font-body rounded">
                       Best Seller
                     </span>
                   )}
-                  <div className="flex gap-2 mt-3">
+                  <div className="flex gap-2 mt-2">
                     <button
                       onClick={() => openEdit(p)}
                       className="flex-1 py-2 border border-border rounded-lg font-body text-xs text-foreground hover:bg-secondary transition-colors flex items-center justify-center gap-1"
